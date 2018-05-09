@@ -269,7 +269,7 @@ const NetworkMonitor = function (vm) {
 
 		return {
 			connected: peers.connected.length,
-			total: peers.connected.length,
+			total: peers.connected.length + peers.disconnected.length,
 			platforms: platforms.detected(),
 			versions: versions.detected(),
 			heights: heights.detected(),
@@ -281,6 +281,7 @@ const NetworkMonitor = function (vm) {
 		// default sort in sort by version
 		vm.peers = {
 			connected: peers.list.connected,
+			disconnected: peers.list.disconnected,
 		};
 
 		vm.counter = this.counter(vm.peers);
