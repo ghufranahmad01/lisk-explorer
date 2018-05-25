@@ -84,3 +84,18 @@ AppSearch.directive('search', ($stateParams, $location, $timeout, Global, $http)
 		template,
 	};
 });
+
+AppSearch.factory('focus', ($timeout, $window) => id => $timeout(() => {
+	const element = $window.document.getElementById(id);
+	if (element) element.focus();
+}));
+
+AppSearch.directive('eventFocus', focus => (scope, elem, attr) => {
+	elem.on(attr.eventFocus, () => {
+		focus(attr.eventFocusId);
+	});
+	scope.$on('$destroy', () => {
+		/* global element */
+		element.off(attr.eventFocus);
+	});
+});
